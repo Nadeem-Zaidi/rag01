@@ -6,6 +6,7 @@ import { LLMResponse } from "../lm_response/llm_response.js";
 import { MaximoChat } from "../maximo_chat/maximo_chat.js";
 import { tryCatch } from "../helper/try_catch.js";
 import { LLMForDetail } from "../lm_response/llm_response_detail.js";
+import path from "path";
 
 
 const router = Router();
@@ -39,9 +40,12 @@ router.post("/", tryCatch(async (req:Request, res:Response,next:NextFunction) =>
   }
 }));
 
-router.post("/detail",tryCatch(async (req:Request,res:Response,next:NextFunction)=>{
-    
-
+router.get("/detail",tryCatch(async (req:Request,res:Response,next:NextFunction)=>{
+  
+  await maximo_chat.generate_store_embeddings("./src/documents")
+  res.json({"status":"done"})
 }))
+
+
 
 export default router;

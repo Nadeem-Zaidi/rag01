@@ -20,6 +20,7 @@ export class VectorStore implements IVectorStore{
         for(const filename of files){
             if(!filename.endsWith(".txt")) continue;
             const filepath=path.join(directory_name,filename)
+            console.log(filepath)
             const filestream=fs.createReadStream(filepath,{encoding:"utf-8"})
             const rl=readline.createInterface({
                 input:filestream,
