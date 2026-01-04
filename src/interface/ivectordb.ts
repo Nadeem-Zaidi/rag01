@@ -6,6 +6,8 @@ export interface IVectorDB {
     payload: Record<string, any>
   ): Promise<void>;
 
+  ensureCollection():Promise<void>
+
   upsertMany(
     ids: string[],
     vectors: number[][],

@@ -6,13 +6,13 @@ export class QDRantDb implements IVectorDB {
     private collection: string;
     private size: number;
 
-    constructor(collection_name: string, size: number, url: string = "http://localhost:6333") {
+    constructor(collection_name: string, size: number, url: string = process.env.QDRANT_URL || "http://localhost:6333") {
         this.client = new QdrantClient({ url: url, checkCompatibility: false });
         this.collection = collection_name;
         this.size = size;
 
     }
-    private async ensureCollection() {
+    async ensureCollection() {
         const exists = await this.client.collectionExists(this.collection);
         if (!exists.exists) {
             await this.client.createCollection(this.collection, {
@@ -22,10 +22,9 @@ export class QDRantDb implements IVectorDB {
                 },
             });
         }
-
     }
     async upsert(id: string, vector: number[], payload: Record<string, any>): Promise<void> {
-        
+
         await this.client.upsert(this.collection, {
             wait: true,
             points: [

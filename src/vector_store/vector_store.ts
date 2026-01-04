@@ -50,6 +50,7 @@ export class VectorStore implements IVectorStore{
         throw new Error("Method not implemented.");
     }
     async generate_and_save_embeddings_paragraph_wise(directory_name: string): Promise<void> {
+        await this.vector_client.ensureCollection()
         for await (const chunk of this.read_files_paragraphs(directory_name)){
             const embedding=await this.llm_client.embedding(chunk)
             await this.vector_client.upsert(randomUUID(),embedding,{text:chunk})
