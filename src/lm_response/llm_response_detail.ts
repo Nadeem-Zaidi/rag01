@@ -4,8 +4,6 @@ import type { ILLM } from "../interface/llm.js";
 
 export class LLMForDetail implements ILLMResponse{
     private client: ILLM;
-     
-    
       constructor(llmClient: ILLM) {
         this.client = llmClient;
       }

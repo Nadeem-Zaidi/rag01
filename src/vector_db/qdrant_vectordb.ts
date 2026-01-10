@@ -24,7 +24,6 @@ export class QDRantDb implements IVectorDB {
         }
     }
     async upsert(id: string, vector: number[], payload: Record<string, any>): Promise<void> {
-
         await this.client.upsert(this.collection, {
             wait: true,
             points: [

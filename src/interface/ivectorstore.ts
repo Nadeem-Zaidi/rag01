@@ -16,4 +16,6 @@ export interface IVectorStore {
   generate_and_save_embeddings_paragraph_wise(
     directory_name: string
   ): Promise<void>;
+
+  generate_and_save_embeddings_paragraph_wise_from_s3():Promise<void>
 }
